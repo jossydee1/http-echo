@@ -1,0 +1,36 @@
+---
+# Source: helm/templates/service.yml
+apiVersion: v1
+kind: Service
+metadata:
+  name: helm-svc
+spec:
+  selector:
+    app: helm
+
+  type: LoadBalancer
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+---
+# Source: helm/templates/deployment.yml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: release-name-helm
+spec:
+  selector:
+    matchLabels:
+      app: helm
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: helm
+    spec:
+      containers:
+        - name: helm
+          image: jossydee1/echo-app
+          ports:
+            - containerPort: 80

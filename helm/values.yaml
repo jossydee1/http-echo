@@ -1,0 +1,9 @@
+image:
+  repository: "jossydee1/echo-app"
+
+replicaCount: 2
+
+service:
+  port: 80
+  targetPort: 80
+  type: LoadBalancer
